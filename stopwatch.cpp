@@ -13,10 +13,11 @@ QString stopwatch::convert_msec_to_clock_view(QElapsedTimer* timer){
     int secs = timer->elapsed()/1000;
     int mins = (secs/ 60)% 60;
     int hours = secs / 3600;
-    return (QString("%1:%2:%3")
+    return (QString("%1:%2:%3.%4")
                           .arg(hours, 2, 10, QLatin1Char('0'))
                           .arg(mins, 2, 10, QLatin1Char('0'))
-                          .arg(secs, 2, 10, QLatin1Char('0')) );
+                          .arg(secs, 2, 10, QLatin1Char('0'))
+                          .arg(timer->elapsed()%100, 2, 10, QLatin1Char('0')));
 }
 
 void stopwatch::press_start(){

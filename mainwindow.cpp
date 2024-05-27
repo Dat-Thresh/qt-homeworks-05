@@ -12,11 +12,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pb_StartStop->setText("Старт");
     ui->pb_StartStop->setCheckable(true);
     ui->pb_SetCircle->setDisabled(true);
-    ui->lb_Time->setText("00:00:00");
+    ui->lb_Time->setText("00:00:00.00");
 
     stopwatch_obj = new stopwatch();
 
-    //переписать как коннект к методам
+
     connect(ui->pb_StartStop, &QPushButton::clicked, this, &MainWindow::pb_StartStop_clicked);
     connect(stopwatch_obj->main_timer, &QTimer::timeout, this, &MainWindow::lb_time_update);
     connect(ui->pb_SetCircle, &QPushButton::pressed, this, &MainWindow::pb_circle_pressed);
@@ -57,13 +57,12 @@ void MainWindow::pb_circle_pressed(){
                                            .arg(stopwatch_obj->Get_lapse(), 2, 10, QLatin1Char('0'))
                     .append(stopwatch_obj->HowMuchOnLapse()).append("\n"));
         stopwatch_obj->lapse_restart_and_incr();
-        qDebug() << "circle clicked!";
 
 }
 
 //содержимое перенести в класс стопватч
 void MainWindow::pb_clearText_pressed(){
-    ui->lb_Time->setText("00:00:00");
+    ui->lb_Time->setText("00:00:00.00");
     ui->textB_results->clear();
     stopwatch_obj->clear_all();
 
